@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { ConstructorComponent } from './constructor/constructor.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './register.routes';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,6 +17,7 @@ import { routes } from './register.routes';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

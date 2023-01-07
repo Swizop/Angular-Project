@@ -29,4 +29,9 @@ import { Injectable } from '@angular/core';
      var b = !!localStorage.getItem('token');
      return b;
    }
+
+   register() {
+    // de implementat
+    this.router.navigate(['/login']);
+  }
  }
