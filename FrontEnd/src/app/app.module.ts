@@ -8,6 +8,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterModule } from './modules/register/register.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegisterModule } from './modules/register/register.module';
     AppRoutingModule,
     DashboardModule,
     RegisterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

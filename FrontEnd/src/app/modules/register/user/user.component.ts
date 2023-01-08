@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { forbiddenPhoneValidator } from 'src/app/validators/forbidden-phone.directive';
 
@@ -17,45 +19,51 @@ export class UserComponent {
     confirmPassword: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     firstName: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required, forbiddenPhoneValidator()]),
+    phoneNumber: new FormControl('', [Validators.required, forbiddenPhoneValidator()]),
     checkbox: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private http: HttpClient
+  ) { }
 
   get email(): AbstractControl | null {
     return this.registerForm.get('email');
   }
 
-  get password(): AbstractControl | null{
+  get password(): AbstractControl | null {
     return this.registerForm.get('password');
   }
 
-  get confirmPassword(): AbstractControl | null{
+  get confirmPassword(): AbstractControl | null {
     return this.registerForm.get('confirmPassword');
   }
 
-  get lastName(): AbstractControl | null{
+  get lastName(): AbstractControl | null {
     return this.registerForm.get('lastName');
   }
 
-  get firstName(): AbstractControl | null{
+  get firstName(): AbstractControl | null {
     return this.registerForm.get('firstName');
   }
 
 
-  get checkbox(): AbstractControl | null{
+  get checkbox(): AbstractControl | null {
     return this.registerForm.get('checkbox');
   }
 
-  register() {
-    if(this.registerForm.value.password != this.registerForm.value.confirmPassword)
-    {
+  get phoneNumber(): AbstractControl | null{
+    return this.registerForm.get('phoneNumber');
+  }
+
+  register2() {
+    if (this.registerForm.value.password != this.registerForm.value.confirmPassword) {
       console.log('doesnt match');
       this.passwordsMatch = false;
     }
-    else if (this.registerForm.invalid)
-    {
+    else if (this.registerForm.invalid) {
       console.log('form invalid');
     }
     else {

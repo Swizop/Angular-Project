@@ -63,14 +63,14 @@
 
     <div class="form-group">
         <label for="inputPhone1 loginLabel">Număr de telefon</label>
-        <input formControlName="phone" type="text" class="form-control" id="inputPhone1" placeholder="Număr de telefon"
-            required>
+        <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhone1"
+            placeholder="Număr de telefon" required>
         <div
-            *ngIf="this.registerForm.controls['phone'].invalid && (this.registerForm.controls['phone'].dirty || this.registerForm.controls['phone'].touched)">
-            <div *ngIf="this.registerForm.controls['phone'].hasError('forbiddenPhone')" style="color: red;">
+            *ngIf="this.registerForm.controls['phoneNumber'].invalid && (this.registerForm.controls['phoneNumber'].dirty || this.registerForm.controls['phoneNumber'].touched)">
+            <div *ngIf="this.registerForm.controls['phoneNumber'].hasError('forbiddenPhone')" style="color: red;">
                 Nr. de telefon invalid
             </div>
-            <div *ngIf="this.registerForm.controls['phone'].hasError('required')" style="color: red;">
+            <div *ngIf="this.registerForm.controls['phoneNumber'].hasError('required')" style="color: red;">
                 Secțiune obligatorie!
             </div>
         </div>
@@ -88,5 +88,5 @@
     </div>
 </form>
 
-<button (click)="register()" type="submit" class="btn btn-primary loginButton"
+<button (click)="register2()" type="submit" class="btn btn-primary loginButton"
     style="position: relative; left: 26%;">Creează cont</button>
