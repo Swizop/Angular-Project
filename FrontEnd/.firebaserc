@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "proiect-angular-1e4df": {
+      "hosting": {
+        "FrontEnd": [
+          "proiect-angular-1e4df"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "proiect-angular-1e4df"
+  }
+}

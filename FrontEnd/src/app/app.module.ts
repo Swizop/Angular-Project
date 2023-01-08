@@ -9,6 +9,10 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterModule } from './modules/register/register.module';
 import { HttpClientModule } from '@angular/common/http';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardModule,
     RegisterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
