@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { forbiddenPhoneValidator } from 'src/app/validators/forbidden-phone.directive';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-user',
@@ -26,7 +26,7 @@ export class UserComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private http: HttpClient
+    private fireAuth: AngularFireAuth
   ) { }
 
   get email(): AbstractControl | null {
@@ -59,7 +59,8 @@ export class UserComponent {
   }
 
   register2() {
-    if (this.registerForm.value.password != this.registerForm.value.confirmPassword) {
+    const registerFormValue = this.registerForm.value;
+    if (registerFormValue.password != registerFormValue.confirmPassword) {
       console.log('doesnt match');
       this.passwordsMatch = false;
     }
@@ -67,8 +68,11 @@ export class UserComponent {
       console.log('form invalid');
     }
     else {
-      console.log(this.registerForm.value);
-      this.authService.register();
+      this.fireAuth.createUserWithEmailAndPassword(registerFormValue.email, registerFormValue.password).then( () => {
+        console.log("Register successful");
+      }, err => {
+        console.log(err.message);
+      })
     }
   }
 }
