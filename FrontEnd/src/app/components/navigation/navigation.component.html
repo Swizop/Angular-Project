@@ -20,6 +20,8 @@
         </div>
     </div>
 
+    <button *ngIf="isAuthenticated()" data-toggle="modal" data-target="#postModal" type="button" class="btn btn-primary"
+        id="buton-adauga">Adaugă un anunț</button>
     <button *ngIf="isAuthenticated()" (click)="logout()" type="button" class="btn btn-primary">Deconectează-te</button>
     <a aria-label="Youtube tutorial" target="_blank" rel="noopener" href="https://youtube.com/" title="YouTube">
         <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg"
@@ -29,4 +31,49 @@
                 d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z" />
         </svg>
     </a>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">Ce proiect doriți să construiți?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+
+                <form [formGroup]="newPostForm">
+                    <div class="form-group">
+                        <label for="newPostTitle">Titlu</label>
+                        <input formControlName="title" type="text" class="form-control" id="newPostTitle"
+                            placeholder="Un titlu succint">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPostDescription">Descriere</label>
+                        <input formControlName="description" type="text" class="form-control" id="newPostDescription"
+                            placeholder="Descrierea proiectului">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPostLocation">Locație</label>
+                        <input formControlName="location" type="text" class="form-control" id="newPostLOcation"
+                            placeholder="Oraș, Județ">
+                    </div>
+                </form>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Închide</button>
+                <button (click)="add_post()" type="button" class="btn btn-primary" id="submit-project">Adaugă
+                    anunțul</button>
+            </div>
+        </div>
+    </div>
 </div>

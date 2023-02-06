@@ -12,12 +12,8 @@ export class AuthService {
     private fireAuth: AngularFireAuth
   ) { }
 
-  login() {
-    // DE IMPLEMENTAT
-
-    localStorage.setItem('token', 'value from API');
-    this.router.navigate(['/']);
-
+  login(email: string, password: string) {
+    return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {

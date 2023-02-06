@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,13 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  errNumber = 0;
+
   public loginForm: FormGroup = new FormGroup({
     email: new FormControl(),
-    password: new FormControl(),
-    checkbox: new FormControl(),
+    password: new FormControl()
   });
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   //getters
   get email(): AbstractControl | null{
@@ -26,16 +28,28 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  get checkbox(): AbstractControl | null{
-    return this.loginForm.get('checkbox');
-  }
-
   ngOnInit(): void {
   }
 
   login() {
-    console.log(this.loginForm.value);
-    this.authService.login();
+    this.authService.login(String(this.email?.value), String(this.password?.value)).then(
+      credential => {
+        const token = credential.user?.getIdToken().then(idToken => {
+          console.log(idToken);
+           if(idToken == '')
+             this.errNumber = 1;
+           else
+           {
+             localStorage.setItem('token', idToken);
+             this.router.navigate(['/']);
+           }
+        })
+      }
+    )
+    .catch(error => {
+      console.error(error.error);
+      this.errNumber = 1;
+    });
   }
 
 }

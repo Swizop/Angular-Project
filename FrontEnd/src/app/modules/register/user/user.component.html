@@ -12,6 +12,10 @@
             <div *ngIf="this.registerForm.controls['email'].hasError('required')" style="color: red;">
                 Secțiune obligatorie!
             </div>
+
+            <div *ngIf="this.errNumber == 1" style="color: red;">
+                Există deja un utilizator cu acest email.
+            </div>
         </div>
     </div>
 
@@ -24,6 +28,9 @@
             <div *ngIf="this.registerForm.controls['password'].hasError('required')" style="color: red;">
                 Secțiune obligatorie!
             </div>
+        </div>
+        <div *ngIf="this.errNumber == 2" style="color: red;">
+            Parola trebuie să conțină cel puțin o literă mică, un număr, o majusculă, un caracter special (!, @, ?).
         </div>
     </div>
 

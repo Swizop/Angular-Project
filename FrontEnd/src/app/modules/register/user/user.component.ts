@@ -12,6 +12,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class UserComponent {
   passwordsMatch = true;
+  errNumber = 0;
 
   public registerForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -54,24 +55,30 @@ export class UserComponent {
     return this.registerForm.get('checkbox');
   }
 
-  get phoneNumber(): AbstractControl | null{
+  get phoneNumber(): AbstractControl | null {
     return this.registerForm.get('phoneNumber');
   }
 
   register2() {
     const registerFormValue = this.registerForm.value;
     if (registerFormValue.password != registerFormValue.confirmPassword) {
-      console.log('doesnt match');
+      console.log('Passwords do not match');
       this.passwordsMatch = false;
     }
     else if (this.registerForm.invalid) {
-      console.log('form invalid');
+      console.log('Form invalid');
     }
     else {
-      this.fireAuth.createUserWithEmailAndPassword(registerFormValue.email, registerFormValue.password).then( () => {
-        console.log("Register successful");
+      this.fireAuth.createUserWithEmailAndPassword(registerFormValue.email, registerFormValue.password).then(() => {
+        this.router.navigate(['/']);
       }, err => {
-        console.log(err.message);
+        console.error(err.error);
+        if (err.error == "User already registered") {
+          this.errNumber = 1;
+        }
+        else {
+          this.errNumber = 2;
+        }
       })
     }
   }
