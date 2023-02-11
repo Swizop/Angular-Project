@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(String(this.email?.value), String(this.password?.value)).then(
       credential => {
         const token = credential.user?.getIdToken().then(idToken => {
-          console.log(idToken);
            if(idToken == '')
              this.errNumber = 1;
            else

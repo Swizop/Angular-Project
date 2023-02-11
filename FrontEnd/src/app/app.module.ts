@@ -8,12 +8,13 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterModule } from './modules/register/register.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { AngularFireModule } from '@angular/fire/compat';
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

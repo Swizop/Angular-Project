@@ -62,7 +62,10 @@
                     <div class="form-group">
                         <label for="newPostLocation">Locație</label>
                         <input formControlName="location" type="text" class="form-control" id="newPostLOcation"
-                            placeholder="Oraș, Județ">
+                            placeholder="Oraș, Județ - ex: Sinaia, Prahova">
+                    </div>
+                    <div *ngIf="this.errNumber == 1" style="color: red;">
+                        Asigurați-vă că ați completat toate secțiunile. <br> Locația trebuie trecută astfel: Oraș, Județ
                     </div>
                 </form>
 
