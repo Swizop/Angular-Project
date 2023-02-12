@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { forbiddenPhoneValidator } from 'src/app/validators/forbidden-phone.directive';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
+
   passwordsMatch = true;
   errNumber = 0;
 
@@ -24,11 +25,13 @@ export class UserComponent {
     checkbox: new FormControl('', [Validators.required]),
   });
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private fireAuth: AngularFireAuth
-  ) { }
+  constructor(private authService: AuthService,
+    private router: Router, private http: HttpClient) { }
+
+  ngOnInit(): void {
+  }
+
+
 
   get email(): AbstractControl | null {
     return this.registerForm.get('email');
@@ -59,9 +62,9 @@ export class UserComponent {
     return this.registerForm.get('phoneNumber');
   }
 
+
   register2() {
-    const registerFormValue = this.registerForm.value;
-    if (registerFormValue.password != registerFormValue.confirmPassword) {
+    if (this.registerForm.value.password != this.registerForm.value.confirmPassword) {
       console.log('Passwords do not match');
       this.passwordsMatch = false;
     }
@@ -69,15 +72,18 @@ export class UserComponent {
       console.log('Form invalid');
     }
     else {
-      this.fireAuth.createUserWithEmailAndPassword(registerFormValue.email, registerFormValue.password).then(() => {
-        this.router.navigate(['/']);
-      }, err => {
-        console.error(err.error);
-        if (err.error == "User already registered") {
-          this.errNumber = 1;
-        }
-        else {
-          this.errNumber = 2;
+      this.authService.register(this.registerForm.value, '').subscribe({
+        next: data => {
+          this.router.navigate(['/']);
+        },
+        error: error => {
+          console.error(error.error);
+          if (error.error == "User already registered") {
+            this.errNumber = 1;
+          }
+          else {
+            this.errNumber = 2;
+          }
         }
       })
     }

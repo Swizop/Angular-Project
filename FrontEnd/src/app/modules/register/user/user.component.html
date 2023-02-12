@@ -1,99 +1,109 @@
 <form [formGroup]="registerForm">
 
-    <div class="form-group">
-        <label for="inputEmail2 loginLabel">Email</label>
-        <input formControlName="email" type="email" class="form-control" id="inputEmail2" placeholder="Adresa de email"
-            required>
-        <div
-            *ngIf="this.registerForm.controls['email'].invalid && (this.registerForm.controls['email'].dirty || this.registerForm.controls['email'].touched)">
-            <div *ngIf="this.registerForm.controls['email'].hasError('email')" style="color: red;">
-                Email invalid
-            </div>
-            <div *ngIf="this.registerForm.controls['email'].hasError('required')" style="color: red;">
-                Secțiune obligatorie!
-            </div>
 
-            <div *ngIf="this.errNumber == 1" style="color: red;">
-                Există deja un utilizator cu acest email.
-            </div>
-        </div>
+  <div class="form-group">
+    <label for="inputEmail2 loginLabel">Email</label>
+    <input formControlName="email" type="email" class="form-control" id="inputEmail2" placeholder="Adresa de email"
+      required>
+    <div
+      *ngIf="this.registerForm.controls['email'].invalid && (this.registerForm.controls['email'].dirty || this.registerForm.controls['email'].touched)">
+      <div *ngIf="this.registerForm.controls['email'].hasError('email')" style="color: red;">
+        Email invalid
+      </div>
+      <div *ngIf="this.registerForm.controls['email'].hasError('required')" style="color: red;">
+        Secțiune obligatorie!
+      </div>
     </div>
 
-    <div class="form-group">
-        <label for="inputPassword2 loginLabel">Parolă</label>
-        <input formControlName="password" type="password" class="form-control" id="inputPassword2" placeholder="Parolă"
-            required>
-        <div
-            *ngIf="this.registerForm.controls['password'].invalid && (this.registerForm.controls['password'].dirty || this.registerForm.controls['password'].touched)">
-            <div *ngIf="this.registerForm.controls['password'].hasError('required')" style="color: red;">
-                Secțiune obligatorie!
-            </div>
-        </div>
-        <div *ngIf="this.errNumber == 2" style="color: red;">
-            Parola trebuie să conțină cel puțin o literă mică, un număr, o majusculă, un caracter special (!, @, ?).
-        </div>
+    <div *ngIf="this.errNumber == 1" style="color: red;">
+      Există deja un utilizator cu acest email.
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="inputPassword2 loginLabel">Parolă</label>
+    <input formControlName="password" type="password" class="form-control" id="inputPassword2" placeholder="Parolă"
+      required>
+    <div
+      *ngIf="this.registerForm.controls['password'].invalid && (this.registerForm.controls['password'].dirty || this.registerForm.controls['password'].touched)">
+      <div *ngIf="this.registerForm.controls['password'].hasError('required')" style="color: red;">
+        Secțiune obligatorie!
+      </div>
     </div>
 
-    <div class="form-group">
-        <label for="inputPassword3 loginLabel">Reintroduceți parola</label>
-        <input formControlName="confirmPassword" type="password" class="form-control" id="inputPassword3"
-            placeholder="Parolă" required>
-        <div
-            *ngIf="this.registerForm.controls['confirmPassword'].invalid && (this.registerForm.controls['confirmPassword'].dirty || this.registerForm.controls['confirmPassword'].touched)">
-            <div *ngIf="this.registerForm.controls['confirmPassword'].hasError('required')" style="color: red;">
-                Secțiune obligatorie!
-            </div>
-        </div>
-        <div *ngIf="this.passwordsMatch == false" style="color: red;">
-            Parolele nu se potrivesc!
-        </div>
+    <div *ngIf="this.errNumber == 2" style="color: red;">
+      Parola trebuie să conțină cel puțin o literă mică, un număr, o majusculă, un caracter special (!, @, ?).
     </div>
+  </div>
 
-    <label>Nume</label>
-    <div class="form-group">
-        <div style="display: flex; flex-direction: row;">
-            <input formControlName="lastName" type="text" class="form-control" id="inputLastName1" placeholder="Nume"
-                required>
 
-            <input formControlName="firstName" type="text" class="form-control" id="inputFirstName1"
-                placeholder="Prenume" required>
-        </div>
-        <div
-            *ngIf="(this.registerForm.controls['lastName'].invalid && (this.registerForm.controls['lastName'].dirty || this.registerForm.controls['lastName'].touched)) 
+
+  <div class="form-group">
+    <label for="inputPassword3 loginLabel">Reintroduceți parola</label>
+    <input formControlName="confirmPassword" type="password" class="form-control" id="inputPassword3"
+      placeholder="Parolă" required>
+    <div
+      *ngIf="this.registerForm.controls['confirmPassword'].invalid && (this.registerForm.controls['confirmPassword'].dirty || this.registerForm.controls['confirmPassword'].touched)">
+      <div *ngIf="this.registerForm.controls['confirmPassword'].hasError('required')" style="color: red;">
+        Secțiune obligatorie!
+      </div>
+    </div>
+    <div *ngIf="this.passwordsMatch == false" style="color: red;">
+      Parolele nu se potrivesc!
+    </div>
+  </div>
+
+
+
+  <label>Nume</label>
+  <div class="form-group">
+    <div style="display: flex; flex-direction: row;">
+      <input formControlName="lastName" type="text" class="form-control" id="inputLastName1" placeholder="Nume"
+        required>
+
+      <input formControlName="firstName" type="text" class="form-control" id="inputFirstName1" placeholder="Prenume"
+        required>
+    </div>
+    <div
+      *ngIf="(this.registerForm.controls['lastName'].invalid && (this.registerForm.controls['lastName'].dirty || this.registerForm.controls['lastName'].touched)) 
             || (this.registerForm.controls['firstName'].invalid && (this.registerForm.controls['firstName'].dirty || this.registerForm.controls['firstName'].touched))">
-            <div *ngIf="this.registerForm.controls['lastName'].hasError('required') 
+      <div *ngIf="this.registerForm.controls['lastName'].hasError('required') 
             || this.registerForm.controls['firstName'].hasError('required')" style="color: red;">
-                Secțiune obligatorie!
-            </div>
-        </div>
+        Secțiune obligatorie!
+      </div>
     </div>
+  </div>
 
-    <div class="form-group">
-        <label for="inputPhone1 loginLabel">Număr de telefon</label>
-        <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhone1"
-            placeholder="Număr de telefon" required>
-        <div
-            *ngIf="this.registerForm.controls['phoneNumber'].invalid && (this.registerForm.controls['phoneNumber'].dirty || this.registerForm.controls['phoneNumber'].touched)">
-            <div *ngIf="this.registerForm.controls['phoneNumber'].hasError('forbiddenPhone')" style="color: red;">
-                Nr. de telefon invalid
-            </div>
-            <div *ngIf="this.registerForm.controls['phoneNumber'].hasError('required')" style="color: red;">
-                Secțiune obligatorie!
-            </div>
-        </div>
-    </div>
 
-    <div class="form-group form-check">
-        <input formControlName="checkbox" type="checkbox" class="form-check-input" id="inputCheck1">
-        <label class="form-check-label" for="inputCheck1">Sunt de acord cu termenii și condițiile</label>
-        <div
-            *ngIf="this.registerForm.controls['checkbox'].invalid && (this.registerForm.controls['checkbox'].dirty || this.registerForm.controls['checkbox'].touched)">
-            <div *ngIf="this.registerForm.controls['checkbox'].hasError('required')" style="color: red;">
-                Termenii și condițiile trebuie acceptate!
-            </div>
-        </div>
+  <div class="form-group">
+    <label for="inputPhone1 loginLabel">Număr de telefon</label>
+    <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhone1"
+      placeholder="Număr de telefon" required>
+    <div
+      *ngIf="this.registerForm.controls['phoneNumber'].invalid && (this.registerForm.controls['phoneNumber'].dirty || this.registerForm.controls['phoneNumber'].touched)">
+      <div *ngIf="this.registerForm.controls['phoneNumber'].hasError('forbiddenPhone')" style="color: red;">
+        Nr. de telefon invalid
+      </div>
+      <div *ngIf="this.registerForm.controls['phoneNumber'].hasError('required')" style="color: red;">
+        Secțiune obligatorie!
+      </div>
     </div>
+  </div>
+
+
+  <div class="form-group form-check">
+    <input formControlName="checkbox" type="checkbox" class="form-check-input" id="inputCheck1">
+    <label class="form-check-label" for="inputCheck1">Sunt de acord cu termenii și condițiile</label>
+    <div
+      *ngIf="this.registerForm.controls['checkbox'].invalid && (this.registerForm.controls['checkbox'].dirty || this.registerForm.controls['checkbox'].touched)">
+      <div *ngIf="this.registerForm.controls['checkbox'].hasError('required')" style="color: red;">
+        Termenii și condițiile trebuie acceptate!
+      </div>
+    </div>
+  </div>
 </form>
 
 <button (click)="register2()" type="submit" class="btn btn-primary loginButton"
-    style="position: relative; left: 26%;">Creează cont</button>
+  style="position: relative; left: 26%;">Creează cont</button>

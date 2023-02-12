@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Actualizează-ți numărul de telefon</h6>
+    <form [formGroup]="phoneForm">
+      <div class="form-group">
+        <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhoneNumber2"
+          placeholder="Număr nou de telefon">
+      </div>
+    </form>
+
+    <div
+      *ngIf="this.phoneForm.controls['phoneNumber'].invalid && (this.phoneForm.controls['phoneNumber'].dirty || this.phoneForm.controls['phoneNumber'].touched)">
+      <div *ngIf="this.phoneForm.controls['phoneNumber'].hasError('forbiddenPhone')"
+        style="color: red; margin-bottom: 5px;">
+        Nr. de telefon invalid
+      </div>
+    </div>
+    <button (click)="editPhone()" type="submit" class="btn btn-primary"
+      style="background-color: #dea731; border: transparent;">Actualizează</button>
+    <span *ngIf="errNumber == 2"
+      style="color: #dea731; margin: 10px; position: relative; top: 0.7em;">Actualizat!</span>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Șterge-ți contul</h6>
+    <div style="display: flex; flex-direction: column;">
+      <div>
+        <button (click)="deleteAccount()" class="btn btn-primary"
+          style="background-color: tomato; border: transparent;">Șterge cont</button>
+      </div>
+      <small>Atenție! Acțiunea este definitivă!</small>
+    </div>
+  </div>
+</div>

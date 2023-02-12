@@ -20,12 +20,11 @@ export class NavigationComponent implements OnInit {
     location: new FormControl('', [Validators.required, locationValidator()])
   });
 
-  constructor(
-    private authService: AuthService,
-    private data: DataService,
-    private projects: ProjectsService,
-    private router: Router
-  ) { }
+
+  constructor(public authService: AuthService,
+    private data: DataService, private projects: ProjectsService,
+    private router: Router) { }
+
 
   get title(): AbstractControl | null {
     return this.newPostForm.get('title');
@@ -51,27 +50,29 @@ export class NavigationComponent implements OnInit {
   }
 
   newRegisterAs(s: string) {
-    this.data.changeRegisterAs(s); // service folosit pt comunicare intre navbar si register page
+    this.data.changeRegisterAs(s);    // service used to communicate between navbar and register page
+  }
+
+  openModal() {
+    this.errNumber = 3;
   }
 
   add_post() {
-    if(this.newPostForm.invalid)
-     {
-       this.errNumber = 1;
-     }
-     else
-     {
-       this.projects.newProject(this.newPostForm.value).subscribe({
-         next: () => {
-           console.log("Succes!");
-           this.errNumber = 0;
-           this.router.navigate(['/']);
-         },
-         error: err => {
-           console.error(err.error);
-           this.errNumber = 2;
-         }
-       })
-     }
+    if (this.newPostForm.invalid) {
+      this.errNumber = 1;
+    }
+    else {
+      this.projects.new_project(this.newPostForm.value).subscribe({
+        next: () => {
+          console.log("Succes!");
+          this.errNumber = 0;
+          window.location.reload();
+        },
+        error: err => {
+          console.error(err.error);
+          this.errNumber = 2;
+        }
+      })
+    }
   }
 }

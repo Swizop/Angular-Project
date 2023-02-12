@@ -32,23 +32,26 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(String(this.email?.value), String(this.password?.value)).then(
-      credential => {
-        const token = credential.user?.getIdToken().then(idToken => {
-           if(idToken == '')
-             this.errNumber = 1;
-           else
-           {
-             localStorage.setItem('token', idToken);
-             this.router.navigate(['/']);
-           }
-        })
+    this.authService.login(this.loginForm.value).subscribe({
+      next: data => {
+          if(data['token'] == '')
+          {
+            this.errNumber = 1;
+            console.log('no token');
+          }
+          else
+          {
+            localStorage.setItem('token', data['token']);
+            localStorage.setItem('roles', data['roles']);
+            localStorage.setItem('userId', data['id']);
+            this.router.navigate(['/']);
+          }
+      },
+      error: error => {
+          console.error(error.error);
+          this.errNumber = 1;
       }
-    )
-    .catch(error => {
-      console.error(error.error);
-      this.errNumber = 1;
-    });
-  }
+  })
 
+  }
 }

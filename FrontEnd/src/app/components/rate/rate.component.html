@@ -1,0 +1,25 @@
+<h3>Evaluați constructoriii cu care ați lucrat</h3>
+<div *ngIf="acceptedOffers.length == 0" class="alert alert-warning" role="alert">
+    <strong>Ne pare rău!</strong> Puteți evalua doar constructorii ale căror oferte le-ați acceptat.
+</div>
+
+
+<ul class="list-group">
+    <li *ngFor="let offer of acceptedOffers" class="list-group-item">
+        <span> Ați lucrat cu <strong> {{ offer["firstName"] }} </strong> pe proiectul <strong> {{ offer["projectName"]
+                }}</strong>. Oferiți-le o notă din 5: </span><br>
+        <div id="form-stars">
+            <form [formGroup]="starForm">
+                <select id="stars" name="stele" formControlName="nrStars">
+                    <option disabled selected>-</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </form>
+            <button (click)="submitRating(offer['constructorId'])" id="submit-rating">Evaluează</button>
+        </div>
+    </li>
+</ul>

@@ -1,24 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FeedComponent } from './feed/feed.component';
 import { RouterModule } from '@angular/router';
-import { routes } from './dashboard.routes';
-import { EditComponent } from './edit/edit.component';
+import { routes } from './offers.routes';
 import { ReactiveFormsModule } from '@angular/forms';
-import { OfferComponent } from './offer/offer.component';
+import { ProjectOffersComponent } from './project-offers/project-offers.component';
+import { CleanDatePipe } from 'src/app/pipes/clean-date.pipe';
 
 
 
 @NgModule({
   declarations: [
-    FeedComponent,
-    EditComponent,
-    OfferComponent
+    ProjectOffersComponent,
+    CleanDatePipe
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule
+  ],
+  exports: [
+    CleanDatePipe
   ]
 })
-export class DashboardModule { }
+export class OffersModule { }

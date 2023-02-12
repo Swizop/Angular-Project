@@ -1,1 +1,43 @@
 <h1>Anunțuri de proiecte care așteaptă oferte</h1>
+
+
+<div class="list-group" id="forum">
+  <div *ngFor="let project of allProjects" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1 lgi-heading">{{ project["title"] }}</h5>
+      <p><strong>{{ project["location"] }}</strong></p>
+    </div>
+    <p class="mb-1">{{ project["description"] }}</p>
+    <small>{{ project["firstName"] }}</small><br>
+
+    <div class="icon-box">
+      <div title="Vizualizați ofertele">
+        <button (click)='goToProjectOffers(project["id"])' *ngIf='project["userId"] == authService.getUserId()'
+          class='user-button'>
+          <span class="iconify" data-icon="bi:eye-fill"></span>
+        </button>
+      </div>
+      <div title="Editați postarea">
+        <button (click)='edit(project)' *ngIf='project["userId"] == authService.getUserId()' class='user-button'>
+          <span class="iconify" data-icon="akar-icons:edit"></span>
+        </button>
+      </div>
+      <div title="Ștergeți postarea">
+        <button (click)='delete(project["id"])' *ngIf='project["userId"] == authService.getUserId()'
+          class='user-button'>
+          <span class="iconify" data-icon="bi:trash"></span>
+        </button>
+      </div>
+      <div title="Conectați-vă">
+        <button (click)='offer(project)' *ngIf="authService.isConstructor()" class="user-button">
+          <span class="iconify" data-icon="healthicons:construction-worker-outline"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<app-edit *ngIf="toggleEdit == true" (finalizeEditEvent)="finishEditing($event)" [project]="injectProject"></app-edit>
+<app-offer *ngIf="toggleOffer == true" (finalizeOfferEvent)="finishOffering($event)"
+  [project]="injectProject"></app-offer>

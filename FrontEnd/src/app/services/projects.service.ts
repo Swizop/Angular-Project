@@ -1,15 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsService {
 
-  public apiUrl = 'https://proiect-angular-1e4df-default-rtdb.firebaseio.com';
+  public apiUrl = 'https://localhost:44396/api/Project';
   constructor(private http: HttpClient) { }
 
-  newProject(newPostFormValue: any) {
-    return this.http.post<any>(this.apiUrl + '/projects.json', newPostFormValue);
+  new_project(pFV : any) {
+    return this.http.post<any>(this.apiUrl + '/new', pFV);
+  }
+
+  edit_project(eFV : any, id : any) {
+    return this.http.put(this.apiUrl + '/edit/' + id, eFV);
+  }
+
+  getAvailableProjects(): Observable<any> {
+    return this.http.get(this.apiUrl);
+  }
+
+  deleteProject(id: any): Observable<any> {
+    return this.http.delete(this.apiUrl + '/delete/' + id);
   }
 }

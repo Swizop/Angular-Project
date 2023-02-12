@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div style="display: block;" class="modal" id="offerModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenteredLabel">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenteredLabel">Faceți o ofertă! (în RON)</h5>
+        <button (click)="closeOffer()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+        <form [formGroup]="offerForm">
+          <label>Interval de preț estimat</label>
+          <div class="form-group">
+            <div style="display: flex; flex-direction: row;">
+              <input formControlName="minBound" type="number" class="form-control" id="minBound" min="0"
+                placeholder="Minim">
+
+              <input formControlName="maxBound" type="number" class="form-control" id="maxBound" min="0"
+                placeholder="Maxim">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="offerDate">Cea mai devreme dată la care puteți începe</label>
+            <input formControlName="date" type="date" class="form-control" id="offerDate">
+          </div>
+          <div *ngIf="this.errNumber == 1" style="color: red;">
+            Asigurați-vă că ați completat toate secțiunile.
+          </div>
+        </form>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="closeOffer()" class="btn btn-secondary" data-dismiss="modal">Închide</button>
+        <button type="button" (click)="submitOffer()" class="btn btn-primary" id="submit-offer"
+          style="background-color: #dea731;">Trimite oferta</button>
+      </div>
+    </div>
+  </div>
+</div>

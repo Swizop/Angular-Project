@@ -1,0 +1,37 @@
+<h2>Oferte pentru proiectul dumneavoastră</h2>
+<div class="list-group" id="offers-div">
+  <div *ngFor="let offer of allOffers" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1 lgi-heading">{{ offer["firstName"] }}</h5>
+      <p>Estimat: <strong>{{ offer["minBound"] }} - {{ offer["maxBound"] }} RON</strong></p>
+    </div>
+    <div class="d-flex w-100 justify-content-between">
+      <p>{{ offer["about"] }} </p>
+      <p class="mb-1">Data începere: <strong>{{ offer["startDate"] | cleanDate}}</strong></p>
+    </div>
+
+    <div class="star-group">
+      <span *ngIf="offer['rating'] > 0" class="iconify star" data-icon="bi:star-fill"></span>
+      <span *ngIf="offer['rating'] > 1" class="iconify star" data-icon="bi:star-fill"></span>
+      <span *ngIf="offer['rating'] > 2" class="iconify star" data-icon="bi:star-fill"></span>
+      <span *ngIf="offer['rating'] > 3" class="iconify star" data-icon="bi:star-fill"></span>
+      <span *ngIf="offer['rating'] > 4" class="iconify star" data-icon="bi:star-fill"></span>
+
+      <span *ngIf="5 > offer['rating']" class="iconify star" data-icon="bi:star"></span>
+      <span *ngIf="4 > offer['rating']" class="iconify star" data-icon="bi:star"></span>
+      <span *ngIf="3 > offer['rating']" class="iconify star" data-icon="bi:star"></span>
+      <span *ngIf="2 > offer['rating']" class="iconify star" data-icon="bi:star"></span>
+      <span *ngIf="1 > offer['rating']" class="iconify star" data-icon="bi:star"></span>
+      <small> Nota {{ offer['rating'] }} din {{ offer['ratingsCount'] }} evaluări.</small>
+    </div>
+    <div class="d-flex w-100 justify-content-between">
+      <small>{{ offer["email"] }}, {{ offer["phoneNumber"] }}</small><br>
+      <div>
+        <button (click)="editOffer(offer['constructorId'])" class="accept-delete-buttons btn btn-secondary"
+          style="background-color: #dea731;">Acceptă</button>
+        <button (click)="deleteOffer(offer['constructorId'])" class="accept-delete-buttons btn btn-secondary"
+          style="background-color:tomato;">Șterge</button>
+      </div>
+    </div>
+  </div>
+</div>
